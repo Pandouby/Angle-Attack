@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".GameActivity"
     android:background="@color/dark_grey">
 
     <LinearLayout
@@ -15,42 +15,39 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/highscoreLable"
+            android:id="@+id/currentAngle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|center_vertical"
-            android:text="Highscore"
+            android:text="90°"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/highscoreValue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|center_vertical"
-            android:text="--"
-            android:textColor="@color/white" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="155dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|center_horizontal|center_vertical"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/startButton"
-                android:layout_width="320dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="start" />
-        </LinearLayout>
+            android:textSize="34sp" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/angleToMatchLable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|center_vertical"
+            android:text="angle to match"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/angleToMatch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|center_vertical"
+            android:text="46°"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

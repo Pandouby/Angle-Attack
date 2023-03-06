@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.time.LocalTime;
+import java.time.temporal.ChronoField;
+
 import ch.sid.angleattack.Highscore.Highscore;
 import ch.sid.angleattack.Highscore.HighscoreHandler;
 
@@ -35,12 +38,10 @@ public class MainActivity extends AppCompatActivity {
     private void startGame() {
         Intent i = new Intent(this, GameActivity.class);
         Bundle bundle = new Bundle();
-        /**
-        bundle.putDouble("weight", weight);
-        bundle.putDouble("height", height);
 
+        bundle.putLong("startTime", LocalTime.now().getLong(ChronoField.MILLI_OF_SECOND));
         i.putExtras(bundle);
-         **/
+
         startActivity(i);
     }
 }

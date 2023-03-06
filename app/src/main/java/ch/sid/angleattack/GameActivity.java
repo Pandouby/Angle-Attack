@@ -12,6 +12,8 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.widget.TextView;
 
+import java.io.Console;
+import java.sql.Connection;
 import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.time.temporal.ChronoField;
@@ -92,19 +94,4 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         startActivity(i);
     }
-
-    /**
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
-            SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
-            SensorManager.getOrientation(rotationMatrix, orientationValues);
-            // Convert the orientation values from radians to degrees
-            float azimuth = (float) Math.toDegrees(orientationValues[0]);
-
-            TextView textView = findViewById(R.id.currentAngle);
-            textView.setText(String.valueOf(azimuth + "°"));
-        }
-    }
-     **/
 }

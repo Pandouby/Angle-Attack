@@ -22,7 +22,7 @@ public class HighscoreHandler extends AppCompatActivity {
         if(sharedPreferences.getString("highscore", "") != "") {
             highscore = gson.fromJson(sharedPreferences.getString("highscore", ""), Highscore.class);
         } else {
-            highscore = new Highscore(null, 0);
+            highscore = new Highscore(LocalDateTime.now(), 0);
         }
     }
 

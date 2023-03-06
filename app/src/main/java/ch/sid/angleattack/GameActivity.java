@@ -77,6 +77,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     }
 
     private void gameWon() {
+        stop();
         vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
         long endTime = System.currentTimeMillis();
         double duration = (endTime- startTime) / 1000;

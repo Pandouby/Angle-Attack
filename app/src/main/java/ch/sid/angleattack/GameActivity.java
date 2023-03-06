@@ -8,6 +8,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.widget.TextView;
 
 import java.time.LocalTime;
@@ -17,6 +19,7 @@ import ch.sid.angleattack.Highscore.HighscoreHandler;
 
 public class GameActivity extends AppCompatActivity implements SensorEventListener {
 
+    private Vibrator vibrator;
     private SensorManager sensorManager;
     private Sensor rotationSensor;
     private float[] rotationMatrix = new float[9];
@@ -32,12 +35,13 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-        sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_UI);
 
         randomAngle = Math.round((Math.random()*360) - 180);
 
         TextView textView = findViewById(R.id.angleToMatch);
         textView.setText(String.valueOf(randomAngle + "°"));
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
     }
 
     public void stop() {
@@ -63,6 +67,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     }
 
     private void gameWon() {
+        vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+
         Bundle bundle = getIntent().getExtras();
         long startTime = bundle.getLong("startTime");
 

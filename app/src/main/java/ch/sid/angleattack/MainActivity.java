@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(String.valueOf(highscore.getTime() + "s"));
 
         TextView highscoreDate = findViewById(R.id.highscoreDate);
-        highscoreDate.setText(String.valueOf(highscore.getCreationDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
+        highscoreDate.setText(highscore.getCreationDate());
     }
 
     private void startGame() {

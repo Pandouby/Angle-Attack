@@ -5,15 +5,15 @@ import android.content.SharedPreferences;
 import java.time.LocalDateTime;
 
 public class Highscore {
-    private LocalDateTime creationDate;
+    private String creationDate;
     private double time;
 
-    public Highscore(LocalDateTime creationDate, double time) {
+    public Highscore(String creationDate, double time) {
         this.creationDate = creationDate;
         this.time = time;
     }
 
-    public LocalDateTime getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 

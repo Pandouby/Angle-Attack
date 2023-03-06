@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class HighscoreHandler extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
@@ -22,14 +23,14 @@ public class HighscoreHandler extends AppCompatActivity {
         if(sharedPreferences.getString("highscore", "") != "") {
             highscore = gson.fromJson(sharedPreferences.getString("highscore", ""), Highscore.class);
         } else {
-            highscore = new Highscore(LocalDateTime.now(), 0);
+            highscore = new Highscore(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString(), 0);
         }
     }
 
     public void saveHighscore(double time) {
         if(highscore.getTime() == 0 || time < highscore.getTime()) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            highscore = new Highscore(LocalDateTime.now(), time);
+            highscore = new Highscore(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString(), time);
             editor.putString("highscore", gson.toJson(highscore));
             editor.apply();
         }

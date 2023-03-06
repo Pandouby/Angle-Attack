@@ -12,9 +12,11 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.widget.TextView;
 
+import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 
+import ch.sid.angleattack.Highscore.Highscore;
 import ch.sid.angleattack.Highscore.HighscoreHandler;
 
 public class GameActivity extends AppCompatActivity implements SensorEventListener {
@@ -27,17 +29,20 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     private double randomAngle;
     private HighscoreHandler highscoreHandler;
+    private long startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        startTime = System.currentTimeMillis();
+        highscoreHandler = new HighscoreHandler(getBaseContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-        sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_UI);
+        sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
-        randomAngle = Math.round((Math.random()*360) - 180);
+        randomAngle = Math.round((Math.random()*360));
 
         TextView textView = findViewById(R.id.angleToMatch);
         textView.setText(String.valueOf(randomAngle + "°"));
@@ -54,10 +59,15 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
             SensorManager.getOrientation(rotationMatrix, orientationValues);
             // Convert the orientation values from radians to degrees
-            float azimuth = (float) Math.toDegrees(orientationValues[0]);
+            double azimuth = (Math.toDegrees(orientationValues[0]) + 360) % 360;
+            azimuth = Math.round(azimuth * 100.0) / 100.0;
 
             TextView textView = findViewById(R.id.currentAngle);
             textView.setText(String.valueOf(azimuth + "°"));
+
+            if(azimuth >= randomAngle - 1 && azimuth <= randomAngle + 1) {
+                gameWon();
+            }
         }
     }
 
@@ -68,14 +78,17 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     private void gameWon() {
         vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-
-        Bundle bundle = getIntent().getExtras();
-        long startTime = bundle.getLong("startTime");
-
-        double duration = (LocalTime.now().getLong(ChronoField.MILLI_OF_SECOND) - startTime) / 10;
+        long endTime = System.currentTimeMillis();
+        double duration = (endTime- startTime) / 1000;
 
         highscoreHandler.saveHighscore(duration);
-        Intent i = new Intent(this, MainActivity.class);
+
+        Intent i = new Intent(this, ResultActivity.class);
+        Bundle resultBundle = new Bundle();
+
+        resultBundle.putDouble("score", duration);
+        i.putExtras(resultBundle);
+
         startActivity(i);
     }
 
@@ -91,11 +104,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             TextView textView = findViewById(R.id.currentAngle);
             textView.setText(String.valueOf(azimuth + "°"));
         }
-    }
-
-
-    if(azimuth >= randomAngle - 1 && azimuth <= randomAngle + 1) {
-    gameWon();
     }
      **/
 }

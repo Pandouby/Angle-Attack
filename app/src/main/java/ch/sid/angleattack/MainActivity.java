@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.time.format.DateTimeFormatter;
+
 import ch.sid.angleattack.Highscore.Highscore;
 import ch.sid.angleattack.Highscore.HighscoreHandler;
 
@@ -27,11 +29,13 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.highscoreValue);
         textView.setText(String.valueOf(highscore.getTime() + "s"));
+
+        TextView highscoreDate = findViewById(R.id.highscoreDate);
+        highscoreDate.setText(String.valueOf(highscore.getCreationDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
     }
 
     private void startGame() {
         Intent i = new Intent(this, GameActivity.class);
-
         startActivity(i);
     }
 }

@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button calcButton = findViewById(R.id.backToMenu);
+        Button calcButton = findViewById(R.id.startButton);
         calcButton.setOnClickListener(v -> startGame());
 
         highscore = highscoreHandler.getHighscore();

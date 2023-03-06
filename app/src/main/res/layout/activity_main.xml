@@ -46,8 +46,8 @@
             <Button
                 android:id="@+id/startButton"
                 android:layout_width="320dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
+                android:layout_height="60dp"
+                android:gravity="center|center_horizontal|center_vertical"
                 android:text="start" />
         </LinearLayout>
 

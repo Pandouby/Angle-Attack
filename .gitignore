@@ -1,4 +1,6 @@
 #built application files
+
+*.vscode
 *.apk
 *.ap_
 *.aab

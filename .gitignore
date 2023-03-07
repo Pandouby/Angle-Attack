@@ -1,5 +1,6 @@
 #built application files
 
+*log.txt
 *.vscode
 *.apk
 *.ap_

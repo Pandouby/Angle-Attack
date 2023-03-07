@@ -44,7 +44,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
-        randomAngle = Math.round((Math.random()*360));
+        randomAngle = Math.round((Math.random() * 360));
 
         TextView textView = findViewById(R.id.angleToMatch);
         textView.setText(String.valueOf(randomAngle + "°"));
@@ -67,7 +67,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             TextView textView = findViewById(R.id.currentAngle);
             textView.setText(String.valueOf(azimuth + "°"));
 
-            if(azimuth >= randomAngle - 1 && azimuth <= randomAngle + 1) {
+            if (azimuth >= randomAngle - 1 && azimuth <= randomAngle + 1) {
                 gameWon();
             }
         }
@@ -83,7 +83,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
         System.out.println("Vibration: 500ms");
         long endTime = System.currentTimeMillis();
-        double duration = (endTime- startTime) / 1000;
+        double duration = (endTime - startTime) / 1000;
 
         highscoreHandler.saveHighscore(duration);
 
